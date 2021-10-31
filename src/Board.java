@@ -4,18 +4,14 @@ public class Board{
     public static final int SIZE = 4;
     public static final int WIN_STREAK = 3;
 
-    private Mark[][] _data = new Mark[SIZE][SIZE];
+    private final Mark[][] _data = new Mark[SIZE][SIZE];
 
     public Board(){
         initBoard();
     }
     public boolean putMark(Mark mark, int row, int col) {
-        if(row < 0 || row >= SIZE || col < 0 || col >= SIZE){
+        if(row < 0 || row >= SIZE || col < 0 || col >= SIZE || _data[row][col]!= Mark.BLANK){
             return false;
-        }
-        if(_data[row][col]!= Mark.BLANK){
-            return false;
-
         }
         _data[row][col] = mark;
         return true;
