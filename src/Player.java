@@ -10,9 +10,6 @@ public class Player {
             int num = in.nextInt();
             row = num / 10 - 1;
             col = num % 10 - 1;
-            if(board.getMark(row,col)!= Mark.BLANK){
-                continue;
-            }
             playedOnBoard = board.putMark(mark, row, col);
         }
     }
