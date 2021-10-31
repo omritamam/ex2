@@ -13,6 +13,10 @@ public class Board{
         if(row < 0 || row >= SIZE || col < 0 || col >= SIZE){
             return false;
         }
+        if(_data[row][col]!= Mark.BLANK){
+            return false;
+
+        }
         _data[row][col] = mark;
         return true;
     }
