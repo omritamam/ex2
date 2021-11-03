@@ -105,7 +105,7 @@ public class Board{
     }
 
     private Mark checkDiagonal(boolean checkAscendDiagonal, Mark mark) {
-        for(int i =0; i<Board.SIZE; i++){
+        for(int i = 0; i<Board.SIZE; i++){
             int col = i, counter = 0;
             for (int row = 0 ; col < Board.SIZE && col>-1; row++){
                // System.out.println(row+ " " +col);
@@ -121,6 +121,25 @@ public class Board{
                     col--;
                 } else{
                     col++;
+                }
+            }
+        }
+        for(int i = 0; i<Board.SIZE; i++){
+            int row = i, counter = 0;
+            for (int col = 0 ; row < Board.SIZE && row>-1; col++){
+                // System.out.println(row+ " " +col);
+                if(getMark(row,col) != mark){
+                    counter = 0;
+                } else {
+                    counter++;
+                }
+                if(counter == Board.WIN_STREAK){
+                    return mark;
+                }
+                if (checkAscendDiagonal){
+                    row--;
+                } else{
+                    row++;
                 }
             }
         }
