@@ -173,11 +173,12 @@ public class Board{
     private Mark checkDiagonalStartAt(int row, int col, boolean checkAscendDiagonal, Mark mark) {
         int counter = 0;
         while(isValidCoordinates(row,col)){
-            if(getMark(row,col) != mark){
+            if (getMark(row, col) != mark) {
                 counter = 0;
             } else {
                 counter++;
             }
+
             if(checkAscendDiagonal){
                 row--;
                 col++;
