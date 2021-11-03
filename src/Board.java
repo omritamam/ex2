@@ -17,9 +17,13 @@ public class Board{
         return true;
     }
 
+    private boolean isValidCoordinates(int row, int col){
+        return row >= 0 && row < SIZE && col >= 0 && col < SIZE;
+    }
+
     public Mark getMark(int row, int col) {
         //TODO: check if needed
-        if (row < 0 || row >= SIZE || col < 0 || col >= SIZE) {
+        if (!isValidCoordinates(row, col)) {
             return Mark.BLANK;
         }
         return _data[row][col];
@@ -44,7 +48,6 @@ public class Board{
         if (Mark.O == checkWinForMark(Mark.O)) {
             return Mark.O;
         }
-
         return Mark.BLANK;
     }
 
@@ -60,13 +63,13 @@ public class Board{
             col = rowOrCol;
         }
 
-        for (int iteration = 0 ; iteration < Board.SIZE; iteration++){
+        for (int iteration = 0 ; iteration < SIZE; iteration++){
             if(getMark(row,col) != mark){
                 counter = 0;
             } else{
                 counter++;
             }
-            if(counter==Board.WIN_STREAK){
+            if(counter == WIN_STREAK){
                 return mark;
             }
             if(checkRow){
@@ -81,7 +84,7 @@ public class Board{
 
     private Mark checkWinForMark(Mark mark){
         // check all rows and cols
-        for (int rowOrCol = 0 ; rowOrCol < Board.SIZE; rowOrCol++){
+        for (int rowOrCol = 0 ; rowOrCol < SIZE; rowOrCol++){
             Mark rowStatus = checkRowOrCol(rowOrCol, true, mark);
             Mark colStatus = checkRowOrCol(rowOrCol, false, mark);
             if(rowStatus != Mark.BLANK){
@@ -91,61 +94,50 @@ public class Board{
                 return  colStatus;
             }
         }
-        //check diagonals
         return checkDiagonals(mark);
     }
 
-    private Mark checkDiagonals( Mark mark) {
-        Mark firstDiagonal = checkDiagonal(true, mark);
-        Mark secondDiagonal = checkDiagonal(false, mark);
-        if(firstDiagonal != Mark.BLANK){
-            return firstDiagonal;
-        }
-        return secondDiagonal;
-    }
-
-    private Mark checkDiagonal(boolean checkAscendDiagonal, Mark mark) {
-        for(int i = 0; i<Board.SIZE; i++){
-            int col = i, counter = 0;
-            for (int row = 0 ; col < Board.SIZE && col>-1; row++){
-               // System.out.println(row+ " " +col);
-                if(getMark(row,col) != mark){
-                    counter = 0;
-                } else {
-                    counter++;
-                }
-                if(counter == Board.WIN_STREAK){
-                    return mark;
-                }
-                if (checkAscendDiagonal){
-                    col--;
-                } else{
-                    col++;
-                }
+    private Mark checkDiagonals(Mark mark) {
+        for(int row=0; row<SIZE; row++){
+            if(checkDiagonalStartAt(row,0, true, mark) == mark||
+                    checkDiagonalStartAt(row,0, false, mark) == mark){
+                return mark;
             }
         }
-        for(int i = 0; i<Board.SIZE; i++){
-            int row = i, counter = 0;
-            for (int col = 0 ; row < Board.SIZE && row>-1; col++){
-                // System.out.println(row+ " " +col);
-                if(getMark(row,col) != mark){
-                    counter = 0;
-                } else {
-                    counter++;
-                }
-                if(counter == Board.WIN_STREAK){
-                    return mark;
-                }
-                if (checkAscendDiagonal){
-                    row--;
-                } else{
-                    row++;
-                }
+        for(int col=0; col<SIZE; col++){
+            if((checkDiagonalStartAt(0,col, false, mark) == mark)||
+                    checkDiagonalStartAt(SIZE-1,col, true, mark) == mark){
+                return mark;
             }
         }
-
         return Mark.BLANK;
     }
+
+
+    private Mark checkDiagonalStartAt(int row, int col, boolean checkAscendDiagonal, Mark mark) {
+        int counter = 0;
+        while(isValidCoordinates(row,col)){
+            if(getMark(row,col) != mark){
+                counter = 0;
+            } else {
+                counter++;
+            }
+            if(checkAscendDiagonal){
+                row--;
+                col++;
+            }
+            else{
+                row++;
+                col++;
+            }
+            if(counter == Board.WIN_STREAK){
+                return mark;
+            }
+        }
+        return Mark.BLANK;
+    }
+
+
 
 }
 
