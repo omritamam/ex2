@@ -2,6 +2,12 @@ import  java.util.Scanner;
 
 public class Player {
     public Player(){}
+
+    /**
+     *
+     * @param board - Board, the playing board
+     * @param mark - Mark, a mark of current player
+     */
     public void playTurn(Board board, Mark mark){
         int row, col;
         boolean playedOnBoard = false;
