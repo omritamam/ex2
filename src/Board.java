@@ -1,8 +1,8 @@
 
 public class Board{
 
-    public static final int SIZE = 4;
-    public static final int WIN_STREAK = 3;
+    public static int SIZE = 6;
+    public static int WIN_STREAK = 4;
     private final Mark[][] _data = new Mark[SIZE][SIZE];
     private int _markedCellsCounter = 0;
 
