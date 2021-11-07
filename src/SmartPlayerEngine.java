@@ -1,11 +1,16 @@
 public abstract class SmartPlayerEngine extends HumanPlayer{
     protected boolean markCriticalCell(Board board, Mark mark) {
         for (int row = 0; row < Board.SIZE; row++) {
-            for (int col = 0; col < Board.SIZE; col++)
+            for (int col = 0; col < Board.SIZE; col++) {
+                if (checkCriticalCell(board, row, col, mark)) {
+                    board.putMark(mark, row, col);
+                    return true;
+                }
                 if (checkCriticalCell(board, row, col, mark == Mark.O ? Mark.X : Mark.O)) {
                     board.putMark(mark, row, col);
                     return true;
                 }
+            }
         }
         return false;
     }
@@ -36,7 +41,7 @@ public abstract class SmartPlayerEngine extends HumanPlayer{
                 counter++;
                 continue;
             }
-            if (board.getMark(row, col) != mark){
+            if (board.getMark(curRow, curCol) != mark){
                 counter = 0;
             } else {
                 counter++;
