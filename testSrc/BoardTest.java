@@ -1,3 +1,5 @@
+import org.junit.jupiter.api.Test;
+
 import static org.junit.jupiter.api.Assertions.*;
 
 /**
@@ -13,7 +15,7 @@ public class BoardTest {
 	/**
 	 * Checks that a board is created with all marks Blank.
 	 */
-	@org.junit.jupiter.api.Test
+	@Test
 	void checkInitialization() {
 		board = new Board();
 		for (int row = 0; row < Board.SIZE; row++) {
@@ -26,7 +28,7 @@ public class BoardTest {
 	/**
 	 * Checks the PutMark and GetMark work using the same indices.
 	 */
-	@org.junit.jupiter.api.Test
+	@Test
 	void checkPutMarkAndGetMarkSynchronization() {
 		board = new Board();
 		Mark[] marks = {Mark.X, Mark.O};
@@ -45,7 +47,7 @@ public class BoardTest {
 	/**
 	 * Checks that you can't override a placed mark.
 	 */
-	@org.junit.jupiter.api.Test
+	@Test
 	void checkMarksCanNotChange() {
 		board = new Board();
 		assertTrue(board.putMark(Mark.X, 1, 0));
@@ -61,7 +63,7 @@ public class BoardTest {
 	/**
 	 * Checks that putMark returns false for coordinates out of range and does not mark them.
 	 */
-	@org.junit.jupiter.api.Test
+	@Test
 	void checkPutAndGetMarkOutOfRange() {
 		checkPutMarkOutOfRangeWithMark(Mark.X);
 		checkPutMarkOutOfRangeWithMark(Mark.O);
@@ -99,7 +101,7 @@ public class BoardTest {
 	/**
 	 * Checks that gameEnded does not initialize to True.
 	 */
-	@org.junit.jupiter.api.Test
+	@Test
 	void checkGameIsNotFinishedAtStart() {
 		board = new Board();
 		assertFalse(board.gameEnded());
@@ -108,7 +110,7 @@ public class BoardTest {
 	/**
 	 * Checks that X can win.
 	 */
-	@org.junit.jupiter.api.Test
+	@Test
 	void checkXWin() {
 		checkWin(Mark.X);
 	}
@@ -116,53 +118,53 @@ public class BoardTest {
 	/**
 	 * Checks that O can win.
 	 */
-	@org.junit.jupiter.api.Test
+	@Test
 	void checkOWin() {
 		checkWin(Mark.O);
 	}
 
 	void checkWin(Mark mark) {
-		if ((Board.WIN_STREAK != 3) && (Board.SIZE < 4)) {
-			fail("This test assumes a win streak of 3 and a size of at least 4.");
-			return;
-		}
 		// scenario 1: horizontal
 		board = new Board();
-		for (int i = 0; i < 3; i++) {
-			assertFalse(board.gameEnded());
-			board.putMark(mark, 3, 1 + i);
+		for (int i = 0; i < Board.WIN_STREAK; i++) {
+			board.putMark(mark, 2, i);
 		}
 		assertEquals(mark, board.getWinner());
 		// scenario 2: vertical, length 4
 		board = new Board();
 		assertFalse(board.gameEnded(), "End boolean may unwantedly be static.");
-		int[] puttingOrder = {4, 2, 1, 3};
-		for (int i = 0; i < 4; i++) {
-			assertFalse(board.gameEnded());
-			board.putMark(mark, puttingOrder[i], 1);
+		if (Board.WIN_STREAK < 5) {
+			int[] puttingOrder = {3, 1, 0, 4, 2};
+			for (int i = 0; i < 5; i++) {
+				board.putMark(mark, puttingOrder[i], 1);
+			}
+			assertEquals(mark, board.getWinner());
 		}
-		assertEquals(mark, board.getWinner());
+		if (Board.WIN_STREAK < 4) {
+			int[] puttingOrder = {3, 1, 0, 2};
+			for (int i = 0; i < 4; i++) {
+				board.putMark(mark, puttingOrder[i], 1);
+			}
+			assertEquals(mark, board.getWinner());
+		}
 		// scenario 3: first diagonal
 		board = new Board();
-		for (int i = 0; i < 3; i++) {
-			assertFalse(board.gameEnded());
-			board.putMark(mark, 1 + i, i);
+		for (int i = 0; i < Board.WIN_STREAK; i++) {
+			board.putMark(mark, i, i);
 		}
 		assertEquals(mark, board.getWinner());
 		// scenario 4: second diagonal
 		board = new Board();
-		for (int i = 0; i < 3; i++) {
-			assertFalse(board.gameEnded());
-			board.putMark(mark, 3 - i, 1 + i);
+		for (int i = 0; i < Board.WIN_STREAK; i++) {
+			board.putMark(mark, Board.SIZE - 1 - i, i);
 		}
 		assertEquals(mark, board.getWinner());
 	}
 
-
 	/**
 	 * Checks that a draw happens when the board is full with no winning streaks.
 	 */
-	@org.junit.jupiter.api.Test
+	@Test
 	void CheckDraw() {
 		board = new Board();
 		if (Board.WIN_STREAK < 3) {

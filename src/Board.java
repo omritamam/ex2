@@ -1,8 +1,8 @@
 
 public class Board{
 
-    public static final int SIZE = 4;
-    public static final int WIN_STREAK = 3;
+    public static int SIZE = 6;
+    public static int WIN_STREAK = 4;
     private final Mark[][] _data = new Mark[SIZE][SIZE];
     private int _markedCellsCounter = 0;
 
@@ -14,7 +14,7 @@ public class Board{
     }
 
     /**
-     *  paints the board at giveen coordinates with given mark
+     *  paints the board at given coordinates with given mark
      * @param mark - Mark number
      * @param row - number, valid between [0, SIZE-1]
      * @param col - number, valid between [0, SIZE-1]
@@ -43,10 +43,9 @@ public class Board{
      *
      * @param row - number, valid between [0, SIZE-1]
      * @param col - number, valid between [0, SIZE-1]
-     * @return the mark in the given coordinates on the board, for invalid inputs returns Mark.BLANK
+     * @return the mark in the given coordinates on the board, for invalid inputs returns Mark. BLANK
      */
     public Mark getMark(int row, int col) {
-        //TODO: check if needed
         if (!isValidCoordinates(row, col)) {
             return Mark.BLANK;
         }
@@ -54,7 +53,8 @@ public class Board{
     }
 
     /**
-     * marks all spaces with Mark.BLANK
+     *
+     * marks all spaces with Mark. BLANK
      */
     private void initBoard(){
         for(int row = 0 ; row < SIZE ; row++) {
@@ -75,7 +75,7 @@ public class Board{
 
     /**
      *
-     * @return - mark of the winner, Mark.BLANK for ongoing game or tie
+     * @return - mark of the winner, Mark. BLANK for ongoing game or tie
      */
     public Mark getWinner(){
         if (Mark.X == checkWinForMark(Mark.X)) {
@@ -92,7 +92,7 @@ public class Board{
      * @param rowOrCol - number, presents the number of the col or row
      * @param checkRow - boolean, true for checking row, false for checking column
      * @param mark - Mark, which mark to check
-     * @return - mark id a winning streak found, Mark.Blank otherwise
+     * @return - mark if a winning streak found, Mark.Blank otherwise
      */
     private Mark checkRowOrCol( int rowOrCol, boolean checkRow, Mark mark){
         int row = 0 , col = 0, counter =0;
@@ -179,14 +179,12 @@ public class Board{
                 counter++;
             }
 
-            if(checkAscendDiagonal){
+            if (checkAscendDiagonal) {
                 row--;
-                col++;
-            }
-            else{
+            } else {
                 row++;
-                col++;
             }
+            col++;
             if(counter == Board.WIN_STREAK){
                 return mark;
             }
