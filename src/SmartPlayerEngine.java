@@ -31,6 +31,8 @@ public abstract class SmartPlayerEngine extends HumanPlayer{
         int counter = 0;
         for (int i = 0; i < 2* Board.WIN_STREAK; i++) {
             if(curRow == row && curCol == col){
+                curRow += rowChange;
+                curCol += colChange;
                 counter++;
                 continue;
             }

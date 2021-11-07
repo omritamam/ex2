@@ -2,7 +2,7 @@ import static java.lang.Integer.parseInt;
 
 public class Tournament {
 
-    private int rounds;
+    private final int rounds;
     private final Renderer renderer;
     private final Player[] players;
 
@@ -29,21 +29,18 @@ public class Tournament {
                     if (i%2==0) player2Wins++;
                     else player1Wins++;
             }
-            System.out.println(player1Wins+" "+player2Wins+ " "+ties);
+            System.out.println(player1Wins + " " + player2Wins + " " + ties);
         }
     }
     public static void main(String[] args){
         PlayerFactory playerFactory = new PlayerFactory();
         RendererFactory rendererFactory = new RendererFactory();
-
         Tournament tournament = new Tournament(parseInt(args[0]),
                                                 rendererFactory.buildRenderer(args[1]),
                                                 new Player[]{
-                                                        playerFactory.buildPlayer(args[0]),
-                                                        playerFactory.buildPlayer(args[0])});
+                                                        playerFactory.buildPlayer(args[2]),
+                                                        playerFactory.buildPlayer(args[3])});
         tournament.playTournament();
-        Game game = new Game(new HumanPlayer(), new HumanPlayer(), new ConsoleRenderer());
-        game.run();
     }
 
 }
