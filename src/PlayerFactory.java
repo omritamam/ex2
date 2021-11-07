@@ -1,4 +1,9 @@
 public class PlayerFactory {
+    /**
+     *
+     * @param PlayerType - String = human/clever/whatever/snartypamts
+     * @return - Player object for valid input, null otherwise
+     */
     public Player buildPlayer(String PlayerType){
         switch (PlayerType){
             case "human":

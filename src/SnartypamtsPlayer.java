@@ -18,7 +18,13 @@ public class SnartypamtsPlayer extends SmartPlayerEngine {
 
     }
 
-
+    /**
+     * marks a single cell in the layer
+     * @param board - a board
+     * @param mark - a maek
+     * @param layerNum - the number of the layer inside the board. 0 for only the middle cell.
+     * @return - true if a cell was marked
+     */
     private boolean markAtLayerNumber(Board board, Mark mark, int layerNum) {
         if(markAtRowOrCol(board,  mark,  Board.SIZE/2-layerNum,  Board.SIZE/2-layerNum,  2*layerNum+1, true)) return true;
         if(markAtRowOrCol(board,  mark,  Board.SIZE/2+layerNum,  Board.SIZE/2-layerNum,  2*layerNum+1, true)) return true;
@@ -26,6 +32,16 @@ public class SnartypamtsPlayer extends SmartPlayerEngine {
         return markAtRowOrCol(board, mark, Board.SIZE / 2 - layerNum, Board.SIZE / 2 + layerNum, 2 * layerNum + 1, false);
     }
 
+    /**
+     * mark a single cell in a given rox/col starting at given coordinates (row, col)
+     * @param board - a board
+     * @param mark - a maek
+     * @param row - row index
+     * @param col - col index
+     * @param distance - length of the col/ row
+     * @param rowOrCol - true for row, false for col
+     * @return - true if a cell was marked
+     */
     private boolean markAtRowOrCol(Board board, Mark mark, int row, int col, int distance, boolean rowOrCol) {
         boolean isPlayed;
         for (int i = 0; i < distance; i++) {

@@ -1,7 +1,7 @@
 import java.util.Random;
 
 public class WhateverPlayer extends HumanPlayer{
-    private Random Rand = new Random();
+    private final Random Rand = new Random();
     @Override
     /**
      * play 1 turn on given board and mark by user input

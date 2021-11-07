@@ -1,6 +1,10 @@
-import static java.lang.Integer.parseInt;
 
+import static java.lang.Integer.parseInt;
 public class Tournament {
+    private static final int roundsUsageIndex = 0;
+    private static final int rendererUsageIndex = 1;
+    private static final int player1UsageIndex = 2;
+    private static final int player2UsageIndex = 3;
 
     private final int rounds;
     private final Renderer renderer;
@@ -11,6 +15,10 @@ public class Tournament {
         this.renderer = renderer;
         this.players = players;
     }
+
+    /**
+     * plays rounds games and print after any game the current result.
+     */
     public void playTournament(){
         int player1Wins =0, player2Wins = 0, ties = 0;
         for(int i=0; i< rounds; i++){
@@ -35,11 +43,11 @@ public class Tournament {
     public static void main(String[] args){
         PlayerFactory playerFactory = new PlayerFactory();
         RendererFactory rendererFactory = new RendererFactory();
-        Tournament tournament = new Tournament(parseInt(args[0]),
-                                                rendererFactory.buildRenderer(args[1]),
+        Tournament tournament = new Tournament(parseInt(args[roundsUsageIndex]),
+                                                rendererFactory.buildRenderer(args[rendererUsageIndex]),
                                                 new Player[]{
-                                                        playerFactory.buildPlayer(args[2]),
-                                                        playerFactory.buildPlayer(args[3])});
+                                                        playerFactory.buildPlayer(args[player1UsageIndex]),
+                                                        playerFactory.buildPlayer(args[player2UsageIndex])});
         tournament.playTournament();
     }
 
