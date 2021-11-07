@@ -92,7 +92,7 @@ public class Board{
      * @param rowOrCol - number, presents the number of the col or row
      * @param checkRow - boolean, true for checking row, false for checking column
      * @param mark - Mark, which mark to check
-     * @return - mark id a winning streak found, Mark.Blank otherwise
+     * @return - mark if a winning streak found, Mark.Blank otherwise
      */
     private Mark checkRowOrCol( int rowOrCol, boolean checkRow, Mark mark){
         int row = 0 , col = 0, counter =0;

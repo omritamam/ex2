@@ -7,7 +7,9 @@ public class PlayerFactory {
                 return new CleverPlayer();
             case "whatever":
                 return new WhateverPlayer();
+            case "snartypamts":
+                return new SnartypamtsPlayer();
         }
-        return new HumanPlayer();
+        return null;
     }
 }

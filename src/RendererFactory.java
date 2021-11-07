@@ -6,6 +6,6 @@ public class RendererFactory {
             case "none":
                 return new VoidRenderer();
         }
-        return new ConsoleRenderer();
+        return null;
     }
 }

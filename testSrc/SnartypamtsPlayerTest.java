@@ -35,19 +35,19 @@ class SnartypamtsPlayerTest {
 	void checkAllWinDistribution() {
 		checkWinDistribution();
 		// TODO uncomment from here
-//		int initialSize = Board.SIZE, initialStreak = Board.WIN_STREAK;
-//		for (int streak = 3; streak < 8; ++streak) {
-//			for (int size = 3; size < 8; ++size) {
-//				if (streak > size) {
-//					continue;
-//				}
-//				Board.WIN_STREAK = streak;
-//				Board.SIZE = size;
-//		checkWinDistribution();
-//			}
-//		}
-//		Board.WIN_STREAK = initialStreak;
-//		Board.SIZE = initialSize;
+		int initialSize = Board.SIZE, initialStreak = Board.WIN_STREAK;
+		for (int streak = 3; streak < 8; ++streak) {
+			for (int size = 3; size < 8; ++size) {
+				if (streak > size) {
+					continue;
+				}
+				Board.WIN_STREAK = streak;
+				Board.SIZE = size;
+		checkWinDistribution();
+			}
+		}
+		Board.WIN_STREAK = initialStreak;
+		Board.SIZE = initialSize;
 		// TODO uncomment to here
 	}
 
