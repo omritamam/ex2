@@ -1,7 +1,6 @@
 import org.junit.jupiter.api.Test;
 
 import java.io.*;
-import java.util.Scanner;
 
 import static org.junit.jupiter.api.Assertions.*;
 
@@ -34,7 +33,6 @@ class SnartypamtsPlayerTest {
 	@Test
 	void checkAllWinDistribution() {
 		checkWinDistribution();
-		// TODO uncomment from here
 		int initialSize = Board.SIZE, initialStreak = Board.WIN_STREAK;
 		for (int streak = 3; streak < 8; ++streak) {
 			for (int size = 3; size < 8; ++size) {
@@ -48,7 +46,6 @@ class SnartypamtsPlayerTest {
 		}
 		Board.WIN_STREAK = initialStreak;
 		Board.SIZE = initialSize;
-		// TODO uncomment to here
 	}
 
 	/**
@@ -68,7 +65,7 @@ class SnartypamtsPlayerTest {
 		Tournament tournament = new Tournament(
 				GAMES * 100,
 				new VoidRenderer(),
-				new Player[]{new SnartypamtsPlayer(), new CleverPlayer()}
+				new Player[]{new CleverPlayer(), new SnartypamtsPlayer()}
 		);
 		tournament.playTournament();
 		var results = getResults();

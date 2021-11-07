@@ -36,7 +36,6 @@ class CleverPlayerTest {
 	@Test
 	void checkAllWinDistribution() {
 		checkWinDistribution();
-		// TODO uncomment from here
 		int initialSize = Board.SIZE, initialStreak = Board.WIN_STREAK;
 		for (int streak = 3; streak < 8; ++streak) {
 			for (int size = 3; size < 8; ++size) {
@@ -45,13 +44,11 @@ class CleverPlayerTest {
 				}
 				Board.WIN_STREAK = streak;
 				Board.SIZE = size;
-				//System.out.println(streak+" "+size);
 				checkWinDistribution();
 			}
 		}
 		Board.WIN_STREAK = initialStreak;
 		Board.SIZE = initialSize;
-		// TODO uncomment to here
 	}
 
 	/**
@@ -72,7 +69,7 @@ class CleverPlayerTest {
 		Tournament tournament = new Tournament(
 				GAMES * 100,
 				new VoidRenderer(),
-				new Player[]{new CleverPlayer(), new WhateverPlayer()}
+				new Player[]{new SnartypamtsPlayer(), new WhateverPlayer()}
 		);
 		tournament.playTournament();
 		var results = getResults();
