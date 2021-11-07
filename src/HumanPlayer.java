@@ -4,7 +4,7 @@ public class HumanPlayer implements Player{
     public HumanPlayer(){}
 
     /**
-     *
+     * play 1 turn on given board and mark.
      * @param board - Board, the playing board
      * @param mark - Mark, a mark of current player
      */

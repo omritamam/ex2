@@ -18,16 +18,13 @@ public abstract class SmartPlayerEngine extends HumanPlayer{
         if(board.getMark(row,col)!=Mark.BLANK) return false;
         int[] rowDirections = {1, 1, 0, -1};
         int[] colDirections = {0,1, 1, 1};
-        int[] rowStart = {row-Board.WIN_STREAK, row-Board.WIN_STREAK, row,row +Board.WIN_STREAK};
-        int[] colStart = {col, col -Board.WIN_STREAK, col -Board.WIN_STREAK, col -Board.WIN_STREAK};
-        for(int i=0; i<4;i++){
+        int[] rowStart = {row - Board.WIN_STREAK, row - Board.WIN_STREAK, row ,row + Board.WIN_STREAK};
+        int[] colStart = {col, col - Board.WIN_STREAK, col -Board.WIN_STREAK, col - Board.WIN_STREAK};
+        for(int i = 0; i < 4 ; i++)
             if(checkPossibleStreakForDirection(board, row, col, rowDirections[i], colDirections[i],
-                    mark, rowStart[i], colStart[i])){
+                    mark, rowStart[i], colStart[i]))
                 return true;
-            }
-        }
         return false;
-
     }
 
 
@@ -39,6 +36,8 @@ public abstract class SmartPlayerEngine extends HumanPlayer{
                 curRow += rowChange;
                 curCol += colChange;
                 counter++;
+                if(counter == Board.WIN_STREAK) return true;
+
                 continue;
             }
             if (board.getMark(curRow, curCol) != mark){
@@ -46,11 +45,10 @@ public abstract class SmartPlayerEngine extends HumanPlayer{
             } else {
                 counter++;
             }
-            if(counter==Board.WIN_STREAK) return true;
+            if(counter == Board.WIN_STREAK) return true;
             curRow += rowChange;
             curCol += colChange;
         }
         return false;
     }
-
 }

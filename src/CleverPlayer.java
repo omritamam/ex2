@@ -1,44 +1,23 @@
 public class CleverPlayer extends SmartPlayerEngine {
     @Override
+    /**
+     * play 1 turn on given board and mark by using markCriticalCell of SmartPlayerEngine first, if no critical cell
+     * was found, mark by minimum available cell.
+     * @param board - Board, the playing board
+     * @param mark - Mark, a mark of current player
+     */
     public void playTurn(Board board, Mark mark) {
-        //check critical cells, if marked - return
+        //check critical cell and mark
         if(markCriticalCell(board, mark)) return;
-
-        // no critical cell, mark for the center outside
-        int layerNum = 0;
-        while(!markAtLayerNumber(board, mark,layerNum)){
-            layerNum++;
-        }
-
-    }
-
-
-    private boolean markAtLayerNumber(Board board, Mark mark, int layerNum) {
-        if(markAtRowOrCol(board,  mark,  Board.SIZE/2-layerNum,  Board.SIZE/2-layerNum,  2*layerNum+1, true)) return true;
-        if(markAtRowOrCol(board,  mark,  Board.SIZE/2+layerNum,  Board.SIZE/2-layerNum,  2*layerNum+1, true)) return true;
-        if(markAtRowOrCol(board,  mark,  Board.SIZE/2-layerNum,  Board.SIZE/2-layerNum,  2*layerNum+1, false)) return true;
-        return markAtRowOrCol(board, mark, Board.SIZE / 2 - layerNum, Board.SIZE / 2 + layerNum, 2 * layerNum + 1, false);
-    }
-
-    private boolean markAtRowOrCol(Board board, Mark mark, int row, int col, int distance, boolean rowOrCol) {
-        boolean isPlayed;
-        for (int i = 0; i < distance; i++) {
-            {
-                isPlayed = board.putMark(mark, col, row);
-                if (isPlayed) {
-                    return true;
-                }
-                if(rowOrCol) {
-                    col++;
-                }
-                else {
-                    row++;
+        //No critical cells
+        for (int row = 0; row < Board.SIZE; row++) {
+            for (int col = 0; col < Board.SIZE; col++) {
+                if(board.putMark(mark, row, col)){
+                    return;
                 }
             }
         }
-        return false;
     }
-
 
 
 }
