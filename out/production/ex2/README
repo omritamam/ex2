@@ -1,2 +1,20 @@
 omri.tamam
 315564112
+
+SmartPlayerEngine used in CleverPlayer and SnartypamtsPlayer,
+the engine affords to check if marking a given cell will complete
+a winning streak - so-called "critical cell. CleverPlayer checks if a
+critical cell exists, if so, it will mark it and win, otherwise, mark
+randomly. SnartypamtsPlayer is clever by checking both for itself and
+blocking the components. More than that, if no critical cells are found for
+player and component, SnartypamtsPlayer will pick the most centered
+available cell.
+
+WhateverPlayer implementation design by Random object property that used
+in playTurn () invoke. playTurn () generates random numbers pair for
+(row, col) coordinates until successful pair.
+
+WhateverPlayer-WhateverPlayer 10,000 games tournament 4968-4974-58
+SnartypamtsPlayer-CleverPlayer 500 games tournament 
+WhateverPlayer-SnartypamtsPlayer games tournament 
+WhateverPlayer - CleverPlayer games tournament 

@@ -1,6 +1,6 @@
 public abstract class SmartPlayerEngine extends HumanPlayer{
     /***
-     * mark a
+     * mark a cell that will complete a winning streak
      * @param board - a board
      * @param mark - a maek
      * @return true if a cell was marked, otherwise, false
@@ -13,6 +13,20 @@ public abstract class SmartPlayerEngine extends HumanPlayer{
                     board.putMark(mark, row, col);
                     return true;
                 }
+            }
+        }
+        return false;
+    }
+
+    /***
+     * mark a cell that will complete a winning streak for component
+     * @param board - a board
+     * @param mark - a maek
+     * @return true if a cell was marked, otherwise, false
+     */
+    protected boolean markCriticalCellForComponent(Board board, Mark mark) {
+        for (int row = 0; row < Board.SIZE; row++) {
+            for (int col = 0; col < Board.SIZE; col++) {
                 //check to block a winning cell for component
                 if (checkCriticalCell(board, row, col, mark == Mark.O ? Mark.X : Mark.O)) {
                     board.putMark(mark, row, col);
@@ -22,6 +36,8 @@ public abstract class SmartPlayerEngine extends HumanPlayer{
         }
         return false;
     }
+
+
 
     /**
      *  check if a cell is critical for mark

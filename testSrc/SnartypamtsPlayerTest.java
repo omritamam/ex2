@@ -65,7 +65,7 @@ class SnartypamtsPlayerTest {
 			return;
 		}
 		Tournament tournament = new Tournament(
-				GAMES * 100,
+				GAMES * 5,
 				new VoidRenderer(),
 				new Player[]{new SnartypamtsPlayer(), new CleverPlayer()}
 		);
